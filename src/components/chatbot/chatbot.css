@@ -1,0 +1,415 @@
+/* =========================================================
+   Trans Care Chatbot
+   Isolated styles — do not affect the rest of the website
+   ========================================================= */
+
+
+/* Floating chatbot button */
+
+.transcare-chatbot-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+
+  width: 60px;
+  height: 60px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #007994;
+  color: #ffffff;
+
+  font-size: 26px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 20px rgba(0, 121, 148, 0.25);
+
+  z-index: 9998;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.transcare-chatbot-button:hover {
+  transform: scale(1.05);
+
+  box-shadow: 0 8px 24px rgba(0, 121, 148, 0.35);
+}
+
+.transcare-chatbot-button:focus-visible {
+  outline: 3px solid rgba(0, 121, 148, 0.25);
+  outline-offset: 3px;
+}
+
+
+/* Chat panel */
+
+.transcare-chatbot-panel {
+  position: fixed;
+
+  top: 12px;
+  right: 12px;
+
+  width: 400px;
+  height: calc(100vh - 24px);
+
+  background: #ffffff;
+
+  border-radius: 18px;
+  overflow: hidden;
+
+  box-shadow: -5px 0 25px rgba(23, 43, 53, 0.12);
+
+  display: flex;
+  flex-direction: column;
+
+  z-index: 9999;
+
+  transform: translateX(calc(100% + 24px));
+
+  transition: transform 0.3s ease;
+
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.transcare-chatbot-panel-open {
+  transform: translateX(0);
+
+  visibility: visible;
+  pointer-events: auto;
+}
+
+
+/* Header */
+
+.transcare-chatbot-header {
+  background: #007994;
+  color: #ffffff;
+
+  padding: 18px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  min-height: 76px;
+
+  flex-shrink: 0;
+}
+
+.transcare-chatbot-header h2 {
+  margin: 0 0 4px;
+
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.transcare-chatbot-header span {
+  font-size: 12px;
+
+  opacity: 0.88;
+}
+
+.transcare-chatbot-close {
+  border: none;
+  background: transparent;
+
+  color: #ffffff;
+
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  padding: 4px 8px;
+}
+
+.transcare-chatbot-close:hover {
+  opacity: 0.8;
+}
+
+.transcare-chatbot-close:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+
+/* Messages */
+
+.transcare-chatbot-messages {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  background: #fafeff;
+
+  min-height: 0;
+}
+
+.transcare-chatbot-message {
+  display: flex;
+
+  max-width: 85%;
+}
+
+.transcare-chatbot-message-content {
+  padding: 11px 14px;
+
+  border-radius: 14px;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* Bot message */
+
+.transcare-chatbot-bot-message {
+  align-self: flex-start;
+}
+
+.transcare-chatbot-bot-message
+  .transcare-chatbot-message-content {
+  background: #e8f8fa;
+  color: #24444d;
+
+  border-bottom-left-radius: 4px;
+}
+
+
+/* User message */
+
+.transcare-chatbot-user-message {
+  align-self: flex-end;
+}
+
+.transcare-chatbot-user-message
+  .transcare-chatbot-message-content {
+  background: #007994;
+  color: #ffffff;
+
+  border-bottom-right-radius: 4px;
+}
+
+
+/* Typing indicator */
+
+.transcare-chatbot-typing {
+  display: flex;
+
+  gap: 4px;
+
+  padding: 0 20px 10px;
+
+  background: #fafeff;
+
+  flex-shrink: 0;
+}
+
+.transcare-chatbot-typing span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #76cbd5;
+
+  animation: transcare-chatbot-typing 1.2s
+    infinite ease-in-out;
+}
+
+.transcare-chatbot-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.transcare-chatbot-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes transcare-chatbot-typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+/* Input area */
+
+.transcare-chatbot-input-area {
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 10px;
+
+  padding: 12px;
+
+  border-top: 1px solid #dce8ea;
+
+  background: #ffffff;
+
+  flex-shrink: 0;
+}
+
+.transcare-chatbot-input-area textarea {
+  flex: 1;
+
+  resize: none;
+
+  border: 1px solid #cbdde0;
+  border-radius: 12px;
+
+  padding: 11px 13px;
+
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+
+  outline: none;
+
+  min-height: 42px;
+  max-height: 120px;
+
+  overflow-y: hidden;
+
+  color: #172b35;
+  background: #ffffff;
+}
+
+.transcare-chatbot-input-area textarea::placeholder {
+  color: #8a999e;
+}
+
+.transcare-chatbot-input-area textarea:focus {
+  border-color: #007994;
+
+  box-shadow:
+    0 0 0 2px rgba(0, 121, 148, 0.08);
+}
+
+.transcare-chatbot-input-area textarea:disabled {
+  opacity: 0.7;
+}
+
+
+/* Send button */
+
+.transcare-chatbot-input-area > button {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #007994;
+  color: #ffffff;
+
+  font-size: 18px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.transcare-chatbot-input-area > button:hover:not(:disabled) {
+  background: #006b83;
+
+  transform: scale(1.04);
+}
+
+.transcare-chatbot-input-area > button:disabled {
+  background: #8acbd3;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* Scrollbar */
+
+.transcare-chatbot-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.transcare-chatbot-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.transcare-chatbot-messages::-webkit-scrollbar-thumb {
+  background: #c5e3e6;
+
+  border-radius: 10px;
+}
+
+.transcare-chatbot-messages::-webkit-scrollbar-thumb:hover {
+  background: #9ed1d6;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .transcare-chatbot-panel {
+    width: calc(100% - 20px);
+    height: calc(100vh - 20px);
+
+    top: 10px;
+    right: 10px;
+
+    border-radius: 16px;
+  }
+
+  .transcare-chatbot-button {
+    right: 18px;
+    bottom: 18px;
+  }
+
+  .transcare-chatbot-messages {
+    padding: 16px;
+  }
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .transcare-chatbot-button,
+  .transcare-chatbot-panel,
+  .transcare-chatbot-input-area > button {
+    transition: none;
+  }
+
+  .transcare-chatbot-typing span {
+    animation: none;
+  }
+}

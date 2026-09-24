@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -17,6 +18,8 @@ import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+
+import { TransCareChatbot } from "@/components/chatbot/TransCareChatbot";
 
 function NotFoundComponent() {
   return (
@@ -133,6 +136,14 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+
+  const isAuthPage =
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/register";
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -153,6 +164,7 @@ function RootComponent() {
           </main>
           <Footer />
         </div>
+        {!isAuthPage && <TransCareChatbot />}
       </AuthProvider>
       <Toaster position="top-center" richColors />
     </QueryClientProvider>
