@@ -10,6 +10,7 @@ interface AuthContextValue {
   isAuthenticated: boolean;
   signUp: (input: SignUpInput) => Promise<AuthUser>;
   signIn: (input: SignInInput) => Promise<AuthUser>;
+  signInDemo: () => Promise<AuthUser>;
   signOut: () => Promise<void>;
   saveProfile: (profile: UserProfile) => Promise<UserProfile>;
 }
@@ -44,6 +45,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const next = await auth.signIn(input);
         setUser(next);
         setProfile(auth.getSession()?.profile ?? null);
+        return next;
+      },
+      signInDemo: async () => {
+        const next = await auth.signInDemo();
+        setUser(next);
+        setProfile(null);
         return next;
       },
       signOut: async () => {

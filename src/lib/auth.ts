@@ -124,6 +124,30 @@ export async function signIn(input: SignInInput): Promise<AuthUser> {
   if (browser()) localStorage.setItem(SESSION_KEY, account.id);
   return wait(publicUser(account));
 }
+export async function signInDemo(): Promise<AuthUser> {
+  const accounts = readAccounts();
+  const demoEmail = "demo@transcare.app";
+
+  let account = accounts.find((a) => a.email === demoEmail);
+
+  if (!account) {
+    account = {
+      id: "demo_user",
+      fullName: "TransCare Demo User",
+      email: demoEmail,
+      createdAt: new Date().toISOString(),
+      password: "",
+    };
+
+    writeAccounts([...accounts, account]);
+  }
+
+  if (browser()) {
+    localStorage.setItem(SESSION_KEY, account.id);
+  }
+
+  return wait(publicUser(account));
+}
 
 export async function signOut(): Promise<void> {
   if (browser()) localStorage.removeItem(SESSION_KEY);

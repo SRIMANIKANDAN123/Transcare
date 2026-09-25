@@ -25,7 +25,7 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginPage() {
-  const { signIn, isAuthenticated, ready } = useAuth();
+  const { signIn, signInDemo, isAuthenticated, ready } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,6 +51,20 @@ function LoginPage() {
       navigate({ to: "/", replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not log you in. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleDemo = async () => {
+    setError(null);
+    setLoading(true);
+
+    try {
+      await signInDemo();
+      toast.success("Demo mode started");
+      navigate({ to: "/", replace: true });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to start demo mode");
     } finally {
       setLoading(false);
     }
@@ -126,6 +140,32 @@ function LoginPage() {
             {forgot ? "Send reset link" : "Log in"}
           </Button>
         </form>
+
+        {!forgot && (
+          <>
+            <div className="my-5 flex items-center gap-3">
+              <div className="h-px flex-1 bg-border" />
+              <span className="text-xs font-medium text-muted-foreground">
+                OR
+              </span>
+              <div className="h-px flex-1 bg-border" />
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              className="h-14 w-full rounded-full border-2 text-base font-semibold"
+              disabled={loading}
+              onClick={() => void handleDemo()}
+            >
+              🚀 Skip Login for Now (Demo)
+            </Button>
+
+            <p className="mt-2 text-center text-xs text-muted-foreground">
+              No account required • Prototype demonstration
+            </p>
+          </>
+        )}
 
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 text-sm">
           <button
